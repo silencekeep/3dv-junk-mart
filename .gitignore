@@ -13,3 +13,6 @@ node_modules/
 # Build
 dist/
 build/
+
+# GitHub PAT (do not commit)
+github_pat.txt
