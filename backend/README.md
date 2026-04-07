@@ -3,7 +3,7 @@
 This directory is reserved for the FastAPI backend.
 
 ## Baseline
-- Python version: 3.12.7
+- Python version: 3.*
 - Framework: FastAPI
 - Dependency file: requirements.txt
 
