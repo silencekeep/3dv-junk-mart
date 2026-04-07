@@ -1,0 +1,15 @@
+# User/editor/temp
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
+
+# Build
+dist/
+build/
