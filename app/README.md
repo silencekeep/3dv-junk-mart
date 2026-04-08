@@ -1,17 +1,18 @@
 # app
 
-A new Flutter project.
+Flutter frontend for the Junk Mart demo.
 
-## Getting Started
+## Run
+1. `flutter pub get`
+2. `flutter run`
 
-This project is a starting point for a Flutter application.
+The app opens on the auth demo gate first. Use sign in or continue as guest to enter the marketplace shell.
 
-A few resources to get you started if this is your first Flutter project:
+Use `flutter run -d android` for a connected phone, or `flutter run -d windows` / `flutter run -d chrome` for desktop and web targets.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Build
+- `flutter build apk --debug`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Notes
+- The app is split into `lib/app`, `lib/features`, `lib/navigation`, `lib/theme`, and `lib/widgets`.
+- Demo navigation is wired so the main tabs and detail flows are reachable after a fresh pull.
