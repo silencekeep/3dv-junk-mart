@@ -14,5 +14,19 @@ node_modules/
 dist/
 build/
 
+# Runtime storage and logs
+*.log
+storage/db/*
+storage/tasks/*
+storage/uploads/*
+storage/processed/*
+storage/models/*
+!storage/.gitkeep
+!storage/db/.gitkeep
+!storage/tasks/.gitkeep
+!storage/uploads/.gitkeep
+!storage/processed/.gitkeep
+!storage/models/.gitkeep
+
 # GitHub PAT (do not commit)
 github_pat.txt

@@ -1,0 +1,13 @@
+# Historical minimal skeleton only.
+# For team setup, prefer trainer/requirements-cu118.txt, trainer/requirements.txt,
+# and trainer/requirements-gsplat-cu118.txt together with docs/17-3DGS项目环境搭建与运行交接文档.md.
+name: 3dgs_app
+channels:
+  - pytorch
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - ffmpeg
+  - pip:
+      - nerfstudio
