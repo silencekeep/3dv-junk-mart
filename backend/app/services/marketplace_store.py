@@ -78,12 +78,6 @@ def _hash_password(password: str) -> str:
     return f"pbkdf2_sha256${iterations}${salt.hex()}${derived_key.hex()}"
 
 
-def _legacy_hash_password(password: str) -> str:
-    digest = hashlib.sha256()
-    digest.update(password.encode("utf-8"))
-    return digest.hexdigest()
-
-
 def _verify_password_hash(password: str, encoded_hash: str | None) -> bool:
     if not encoded_hash:
         return False
@@ -99,7 +93,7 @@ def _verify_password_hash(password: str, encoded_hash: str | None) -> bool:
         derived_key = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
         return hmac.compare_digest(derived_key, expected)
 
-    return hmac.compare_digest(_legacy_hash_password(password), encoded_hash)
+    return False
 
 
 def _generate_id(prefix: str) -> str:
