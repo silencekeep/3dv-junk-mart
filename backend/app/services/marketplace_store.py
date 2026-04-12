@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import hashlib
+import hmac
 import json
+import os
 import sqlite3
 import uuid
 from datetime import datetime, timezone
@@ -70,9 +72,34 @@ def _json_loads(payload: str | None, default: Any = None) -> Any:
 
 
 def _hash_password(password: str) -> str:
+    iterations = 200_000
+    salt = os.urandom(16)
+    derived_key = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
+    return f"pbkdf2_sha256${iterations}${salt.hex()}${derived_key.hex()}"
+
+
+def _legacy_hash_password(password: str) -> str:
     digest = hashlib.sha256()
     digest.update(password.encode("utf-8"))
     return digest.hexdigest()
+
+
+def _verify_password_hash(password: str, encoded_hash: str | None) -> bool:
+    if not encoded_hash:
+        return False
+
+    if encoded_hash.startswith("pbkdf2_sha256$"):
+        try:
+            _, iterations_raw, salt_hex, expected_hex = encoded_hash.split("$", 3)
+            iterations = int(iterations_raw)
+            salt = bytes.fromhex(salt_hex)
+            expected = bytes.fromhex(expected_hex)
+        except (ValueError, TypeError):
+            return False
+        derived_key = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
+        return hmac.compare_digest(derived_key, expected)
+
+    return hmac.compare_digest(_legacy_hash_password(password), encoded_hash)
 
 
 def _generate_id(prefix: str) -> str:
@@ -1166,7 +1193,10 @@ class MarketplaceStore:
 
     def verify_password(self, user_record: dict[str, Any], password: str) -> bool:
         payload = user_record["payload"]
-        return payload.get("password_hash") == _hash_password(password)
+        return _verify_password_hash(password, payload.get("password_hash"))
+
+    def hash_password(self, password: str) -> str:
+        return _hash_password(password)
 
     def create_session(
         self,

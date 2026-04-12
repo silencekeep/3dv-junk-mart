@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import hashlib
 import uuid
 from datetime import datetime, timezone
 from typing import Any
@@ -539,7 +538,7 @@ def auth_register(request: Request, payload: AuthRegisterRequest, store: Marketp
 
     now = _now()
     user_id = _new_id("user")
-    password_hash = hashlib.sha256(payload.password.encode("utf-8")).hexdigest()
+    password_hash = store.hash_password(payload.password)
     user_record = {
         "id": user_id,
         "identifier": payload.identifier.strip(),

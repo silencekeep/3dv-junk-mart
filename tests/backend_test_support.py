@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import os
 import shutil
 import tempfile
 import uuid
@@ -30,9 +31,10 @@ from shared.task_store import (
 
 
 def _hash_password(password: str) -> str:
-    digest = hashlib.sha256()
-    digest.update(password.encode("utf-8"))
-    return digest.hexdigest()
+    iterations = 200_000
+    salt = os.urandom(16)
+    derived_key = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, iterations)
+    return f"pbkdf2_sha256${iterations}${salt.hex()}${derived_key.hex()}"
 
 
 class DummyReporter:
