@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>Viewer 模型缓存</title>
+    <link rel="stylesheet" href="./style.css?v=20260408_43" />
+  </head>
+  <body class="cache-page">
+    <main class="cache-shell">
+      <section class="cache-panel">
+        <div class="cache-panel-header">
+          <div>
+            <p class="eyebrow">3DGS Viewer</p>
+            <h1>模型缓存管理</h1>
+          </div>
+          <p id="cache-summary" class="cache-summary">正在读取缓存...</p>
+        </div>
+
+        <p class="cache-description">
+          这里管理的是 Viewer 写入 WebView IndexedDB 的本地 PLY 模型缓存。删除后，下次查看对应模型会重新下载。
+        </p>
+
+        <div class="cache-actions">
+          <button id="refresh-cache" type="button">刷新</button>
+          <button id="clear-cache" class="danger" type="button">清空模型缓存</button>
+        </div>
+
+        <ul id="cache-list" class="cache-list" aria-live="polite"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="./cache-manager.js?v=20260408_43"></script>
+  </body>
+  </html>

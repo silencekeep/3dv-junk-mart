@@ -1,0 +1,6 @@
+# Backend runtime dependencies validated on the current dev machine (2026-04-08).
+fastapi==0.135.3
+httpx==0.28.1
+pydantic==2.12.5
+python-multipart==0.0.24
+uvicorn[standard]==0.44.0

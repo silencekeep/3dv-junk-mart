@@ -1,0 +1,5 @@
+# CUDA 11.8 / Windows packages validated for the 3dgs_app environment.
+--extra-index-url https://download.pytorch.org/whl/cu118
+
+torch==2.1.2+cu118 ; platform_system == "Windows"
+torchvision==0.16.2+cu118 ; platform_system == "Windows"

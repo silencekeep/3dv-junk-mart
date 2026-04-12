@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>3DGS Viewer</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/playcanvas@2.17.2/+esm" crossorigin />
+    <link rel="stylesheet" href="./style.css?v=20260408_43" />
+    <script type="importmap">
+      {
+        "imports": {
+          "playcanvas": "https://cdn.jsdelivr.net/npm/playcanvas@2.17.2/+esm"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="shell">
+      <main class="viewport">
+        <div class="hud">
+          <div id="viewer-hint" class="hint-pill">单指环绕旋转 · 双指平移/缩放/扭转</div>
+          <div class="viewer-actions">
+            <button id="calibrate-toggle" type="button">校准坐标</button>
+            <button id="calibration-rotate" type="button" hidden>旋转</button>
+            <button id="calibration-translate" type="button" hidden>移动</button>
+            <button id="save-calibration" type="button" hidden>保存校准</button>
+            <button id="cancel-calibration" type="button" hidden>撤销</button>
+            <button id="set-initial-view" type="button">设置初始视角</button>
+            <button id="confirm-initial-view" type="button" hidden>确认</button>
+            <button id="cancel-initial-view" type="button" hidden>取消</button>
+            <button id="animation-toggle" type="button">动画展示</button>
+            <button id="reset-view" type="button">重置视角</button>
+          </div>
+        </div>
+        <div id="animation-panel" class="animation-panel" hidden>
+          <button id="animation-play-toggle" class="animation-play-button" type="button">Play</button>
+          <div id="animation-progress-wrap" class="animation-progress-wrap" aria-hidden="true">
+            <div class="animation-progress-track">
+              <div id="animation-progress-bar" class="animation-progress-bar"></div>
+            </div>
+          </div>
+        </div>
+        <button id="minimal-reset-view" class="icon-button minimal-reset-button" type="button" hidden aria-label="重置视角">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 5a7 7 0 1 1-6.06 3.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+            />
+            <path
+              d="M7 3.5v5h5"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.8"
+            />
+          </svg>
+        </button>
+        <div id="overlay" class="overlay">
+          <div class="status-card">
+            <p id="status-label">正在初始化查看器...</p>
+            <p id="status-detail">等待加载模型文件</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      document.getElementById('status-label').textContent = '正在加载渲染引擎...';
+      document.getElementById('status-detail').textContent = '首次启动需要下载 PlayCanvas 引擎，后续会复用缓存。';
+    </script>
+    <script type="module" src="./viewer.js?v=20260408_43"></script>
+  </body>
+  </html>
